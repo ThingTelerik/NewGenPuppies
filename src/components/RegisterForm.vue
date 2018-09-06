@@ -13,8 +13,8 @@
                 <h4 v-if="isSafe">Your password should be good to go :)</h4>
 		        <h4 v-if="isSafe === false" class="error">Your password has been leaked and you <strong>shouldn't</strong> use it!</h4>
                 <input type="text" v-model="eik"  class="register-control" id="inputEik" placeholder="EIK">    
-                <button type="submit" @click="register" class="btn btn-primary">Register</button>
-            </div>
+              </div>   
+              <button type="submit" @click="register" class="btn btn-primary">Register</button>
         </div>
     </div>
 </template>
@@ -62,7 +62,8 @@ export default{
 		font-weight: 300;
 	}
 	body {
-		margin: 0px;
+        margin: 0px;
+        background: #202024;
 	}
 
     .container {
@@ -72,6 +73,10 @@ export default{
   max-width: 50%;
   padding: 50px 70px 70px 71px;
 }
+
+    .register-form{
+        color: #f7f7f7;
+    }
 
 
     div#app input {
@@ -92,7 +97,7 @@ export default{
 		background-color: #fff;
 		border: 1px solid #dbdbdb;
 		color: #363636;
-		width: 350px;
+		width: 50%;
 		border-left: 0px;
 		border-top: 0px;
 		border-right: 0px;

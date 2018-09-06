@@ -4,6 +4,7 @@
       </div>
       <signin-form/>
       <register-form/>
+      <app-footer v-bind:title= "title"/>
   </div>
 </template>
 
@@ -14,14 +15,21 @@ import VueRouter from 'vue-router'
 //Vue.use(VueRouter)
 import SigninForm from './components/SigninForm.vue'
 import RegisterForm from './components/RegisterForm.vue'
+import Footer from './components/Footer.vue'
 
 //Vue.component('SinginForm', SigninForm)
 
 export default {
   name: 'app',
   components: {
-    SigninForm, RegisterForm
+    SigninForm, RegisterForm, 
+    'app-footer':Footer
    
+  },
+  data(){
+    return{
+      title: 'New Generation Puppies'
+    }
   }
 }
 </script>

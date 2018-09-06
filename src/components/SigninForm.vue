@@ -8,8 +8,9 @@
           <div class="form-group">
             <input type="text" v-model="username" class="form-control" id="inputUsername" placeholder="Username">
             <input type="password" v-model="password" class="form-control" id="inputPassword" placeholder="Password">
+            </div> 
             <button type="submit" @click="register" class="btn btn-primary">Login</button>
-          </div>
+         
     </div>
   </div>
 </template>
@@ -59,29 +60,47 @@ export default{
   height: 50px;
   line-height: 50px;
 }
+.form-heading {
+  color: #f7f7f7;
+}
 
 .form-group {
   margin-bottom: 10px;
 }
 .login-form {
   text-align: center;
+  color: #f7f7f7;
 }
  .btn.btn-primary {
- background-color: #70c7be;
+ background-color: #70c7bea8;
 		border-radius: 4px;
 		border: 0;
 		display: inline-block;
-		color: #ffffff;
+    color: #ffffff;
+    justify-content: center;
+    align-items:center;
+    display: inline-block;
+    font-size: 1em;
 		cursor: pointer;
 		font-weight: 400;
-		height: 2.85em;
+		height: 5em;
 		line-height: 3em;
 		text-align: center;
-		text-decoration: none;
+    text-decoration: none;
+    margin: auto;
 		max-height: 4.5vw;
-  	min-height: 3.5vw;
-		width:25%;
+    min-height: 3.5vw;
+    width:35%;
+    position: relative;
+		text-align: center;
+
 }
+
+	.btn:hover {
+			background-color: #5ddbcebd;;
+		}
+
+	
 </style>
 
 
