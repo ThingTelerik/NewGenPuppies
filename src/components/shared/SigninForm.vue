@@ -6,10 +6,12 @@
     </div>
     <div id="Login">
           <div class="form-group">
+            <p>
             <input type="text" v-model="username" class="form-control" id="inputUsername" placeholder="Username">
+            </p>
             <input type="password" v-model="password" class="form-control" id="inputPassword" placeholder="Password">
             </div> 
-            <button  type="submit" @click="register" class="btn btn-primary" >Login</button>
+           <btn v-on:register = "register()" v-bind:label= "label" v-bind:obj= "obj"/>
          
     </div>
   </div>
@@ -18,19 +20,21 @@
 <script>
 import Vue from "vue";
 import request from './helper.js'
-
+import Button from './Button.vue'
 
 const [post, get, put, deletee] = ["POST", "GET", "PUT", "DELETE"].map(request);
 
 export default{
   name: "SigninForm",
   components: {
-   
+    'btn':Button
   },
   data() {
     return  {
+      obj:{
       username: "Kon",
       password: "secret",
+      },
       label: "Login"
     };
   },
@@ -75,33 +79,7 @@ export default{
   text-align: center;
   color: #f7f7f7;
 }
- .btn {
- background-color: #70c7bea8;
-	border-radius: 4px;
-	border: 0;
-	display: inline-block;
-  color: #ffffff;
-  justify-content: center;
-  align-items:center;
-  display: inline-block;
-  font-size: 1em;
-	cursor: pointer;
-	font-weight: 400;
-	height: 5em;
-	line-height: 3em;
-  text-decoration: none;
-  margin: auto;
-	max-height: 4.5vw;
-  min-height: 3.5vw;
-  width:35%;
-  position: relative;
-	text-align: center;
 
-}
-
-	.btn:hover {
-			background-color: #5ddbcebd;;
-		}
    input {
 		-webkit-box-align: center;
 		-ms-flex-align: center;

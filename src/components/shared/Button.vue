@@ -1,5 +1,5 @@
 <template>
-  <button type="submit" class= "btn">{{label}}
+  <button type="submit" @click="register" class= "btn">{{label}}
     </button>
 </template>
 
@@ -9,11 +9,22 @@ props: {
       label: {
         type: String,
         required: true
-      }
+      },
+      obj: {
+               type: Object,
+              required:true
+           },
+  
     },
     data(){
         return{
+        
         }
+    },
+    methods:{
+      register:function(){
+     this.$emit('register', {})
+      }
     }
 }
 </script>

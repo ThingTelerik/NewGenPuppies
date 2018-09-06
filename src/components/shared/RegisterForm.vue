@@ -6,15 +6,24 @@
         </div>
         <div id = "register">
             <div class="register-form">
-                <input type="text" v-model="name"  class="register-control" id="inputName" placeholder="Name">  
+                <p>
+                <input type="text" v-model="name"  class="register-control" id="inputName" placeholder="Name"> 
+                </p> 
+                <p>
                 <input type="text" v-model="username"  class="register-control" id="inputUsername" placeholder="Username">
+                </p>
+                <p>
                 <vue-isyourpasswordsafe v-model="myStrongPassword" placeholder="Your password"	@onFinishedChecking="isPasswordSafe"/>
+                </p>
+                <p>
                 <input type="password"  v-model="password" class="register-control" id="inputPassword" placeholder="Repeat password">
+                </p>
                 <h4 v-if="isSafe">Your password should be good to go :)</h4>
 		        <h4 v-if="isSafe === false" class="error">Your password has been leaked and you <strong>shouldn't</strong> use it!</h4>
                 <input type="text" v-model="eik"  class="register-control" id="inputEik" placeholder="EIK">    
               </div>   
-              <button type="submit" @click="register" class="btn">Register</button>
+              <btn v-on:register = "register()" v-bind:label= "label" v-bind:obj= "obj"/>
+              
         </div>
     </div>
 </template>
@@ -22,6 +31,7 @@
 <script>
 import Vue from "vue";
 import request from './helper.js'
+import Button from './Button.vue'
 
 
 
@@ -29,14 +39,21 @@ const [post, get, put, deletee] = ["POST", "GET", "PUT", "DELETE"].map(request);
 
 export default{
   name: "RegisterForm",
+  components:{
+      'btn':Button
+  },
   data() {
     return  {
+       obj:{
         name: "FiBank",
         username: "fibank",
-        myStrongPassword: "werdeds",
         password: "",
-        eik: "54879848gh56", 
-        isSafe:null
+        eik: "54879848gh56",
+        },
+        myStrongPassword: "werdeds",
+        isSafe:null,
+        label:"Register",
+        
     };
   },
     methods:{
@@ -70,34 +87,6 @@ export default{
         color: #f7f7f7;
     }
 
-  .btn {
- background-color: #70c7bea8;
-	border-radius: 4px;
-	border: 0;
-	display: inline-block;
-    color: #ffffff;
-    justify-content: center;
-    align-items:center;
-    display: inline-block;
-    font-size: 1em;
-	cursor: pointer;
-	font-weight: 400;
-	height: 5em;
-	line-height: 3em;
-	text-align: center;
-    text-decoration: none;
-    margin: auto;
-		max-height: 4.5vw;
-    min-height: 3.5vw;
-    width:35%;
-    position: relative;
-	text-align: center;
-
-}
-
-	.btn:hover {
-			background-color: #5ddbcebd;;
-        }
         
     input {
 		-webkit-box-align: center;
@@ -117,7 +106,7 @@ export default{
 		background-color: #fff;
 		border: 1px solid #dbdbdb;
 		color: #363636;
-		width: 50%;
+		width: 60%;
 		border-left: 0px;
 		border-top: 0px;
 		border-right: 0px;
