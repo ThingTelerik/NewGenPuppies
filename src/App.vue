@@ -1,7 +1,7 @@
 <template>
   <div id="app">
-      <div ref="container">
-      </div>
+  
+      <app-header v-bind:title = "title" v-on:changeTitle = "updateTitle($event)"/>
       <signin-form/>
       <register-form/>
       <app-footer v-bind:title= "title"/>
@@ -11,30 +11,51 @@
 <script>
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import 'bootstrap'
+import BootstrapVue from 'bootstrap-vue/dist/bootstrap-vue.esm';
+import 'bootstrap/dist/css/bootstrap.css';
+import 'bootstrap-vue/dist/bootstrap-vue.css';
+Vue.use(BootstrapVue);
 
-//Vue.use(VueRouter)
-import SigninForm from './components/SigninForm.vue'
-import RegisterForm from './components/RegisterForm.vue'
+import Header from './components/Header.vue'
+import SigninForm from './components/shared/SigninForm.vue'
+import RegisterForm from './components/shared/RegisterForm.vue'
 import Footer from './components/Footer.vue'
 
-//Vue.component('SinginForm', SigninForm)
+
+
 
 export default {
   name: 'app',
   components: {
-    SigninForm, RegisterForm, 
-    'app-footer':Footer
+    SigninForm, RegisterForm,
+    'app-footer':Footer,
+    'app-header':Header
    
   },
   data(){
     return{
       title: 'New Generation Puppies'
     }
-  }
+  },
+   methods: {
+      updateTitle: function(updatedTitle){
+        this.title = updatedTitle;
+      }
+    }
 }
 </script>
 
 <style>
+* {
+		font-family: 'Nunito', sans-serif;
+		font-weight: 300;
+	}
+	body {
+        margin: 0px;
+        background: #202024;
+	}
+
 #app {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
