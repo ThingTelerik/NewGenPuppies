@@ -15,6 +15,7 @@
 }
 
 
+
  export const[post, get, put, deletee] = ["POST", "GET", "PUT", "DELETE"].map(request);
 
   

@@ -16,7 +16,8 @@ Vue.use(VueIsYourPasswordSafe, {
 Vue.config.productionTip = false
 
 const router = new VueRouter({
-	routes:Routes
+	routes:Routes,
+	mode: 'history'
 })
 
 

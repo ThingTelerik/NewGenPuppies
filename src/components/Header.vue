@@ -10,13 +10,13 @@
 						<div class="collapse navbar-collapse" id="navbarResponsive">
 							<ul class="navbar-nav ml-auto ">
 								<li class="nav-item">
-									<a class="nav-link" href="#">About</a>
+									<router-link to= '/registeradmin' class = "nav-link">Register Admin</router-link>
 								</li>
 								<li class="nav-item">
-									<a class="nav-link" href="#">Users</a>
+										<router-link to= '/registerclient' class = "nav-link">Register Client</router-link>
 								</li>
 								<li class="nav-item">
-									<a class="nav-link" href="#footer">Contact</a>
+										<router-link to= '/showUsers' class = "nav-link">Manage</router-link>
 								</li>
 								<li class="nav-item">
 									<div class="input-group mb-3">

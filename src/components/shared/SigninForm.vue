@@ -1,6 +1,6 @@
 <template>
   <div class="content">
-    <h2 class="form-heading">Client Login</h2>
+    <h2 class="form-heading">Login</h2>
     <div class="login-form">
       <p>Please enter your username and password</p>
     </div>
@@ -11,7 +11,7 @@
             </p>
             <input type="password" v-model="password" class="form-control" id="inputPassword" placeholder="Password">
             </div> 
-           <btn v-on:register = "register()" v-bind:label= "label" v-bind:obj= "obj"/>
+           <btn v-on:register = "register()"  v-bind:label= "label" v-bind:obj= "obj"/>
          
     </div>
   </div>
@@ -40,18 +40,28 @@ export default{
   methods: {
     async register() {
       const { username, password } = this;
-      const r = await post("http://localhost:8080/api/signin", {
+      const r = await post("http://localhost:8080/api/login/signin", {
         data: { username, password }
       });
       const { accessToken } = await r.json();
+    
       this.saveSession({ username, accessToken });
+      if(accessToken!==undefined){
+      this.navigateTo('registerclient');
+      }
     },
     saveSession(session) {
       localStorage.clear();
       localStorage.setItem("usersession", JSON.stringify(session));
       console.log(
       localStorage.getItem("usersession"));
-    }
+    },
+    navigateTo: function (nav) {
+
+    this.$router.push({
+        path: nav
+    })
+  }
   }
 };
  

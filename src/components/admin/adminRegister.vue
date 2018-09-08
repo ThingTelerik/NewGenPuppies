@@ -1,8 +1,8 @@
 <template>
     <div id = "reg-form" class="container">
         <div class="register-form">
-            <h2>Client Register</h2>
-            <p>Register your bank here</p>
+            <h2>{{title}}</h2>
+            <p>{{title}}</p>
         </div>
         <div id = "register">
             <div class="register-form">
@@ -18,9 +18,9 @@
                 <p>
                 <input type="password"  v-model="password" class="register-control" id="inputPassword" placeholder="Repeat password">
                 </p>
-                <h4 v-if="isSafe">Your password should be good to go :)</h4>
-		        <h4 v-if="isSafe === false" class="error">Your password has been leaked and you <strong>shouldn't</strong> use it!</h4>
-                <input type="text" v-model="eik"  class="register-control" id="inputEik" placeholder="EIK">    
+                <h4 v-if="isSafe">Password should be good to go :)</h4>
+		        <h4 v-if="isSafe === false" class="error">Password has been leaked and you <strong>shouldn't</strong> use it!</h4>
+                <input type="text" v-model="email"  class="register-control" id="inputemail" placeholder="Email">    
               </div>   
               <btn v-on:register = "register()" v-bind:label= "label" v-bind:obj= "obj"/>
               
@@ -30,35 +30,36 @@
 
 <script>
 
-import request from './helper.js'
-import Button from './Button.vue'
+import Button from '../shared/Button'
+import request from '../shared/helper.js'
 
 const [post, get, put, deletee] = ["POST", "GET", "PUT", "DELETE"].map(request);
 
 export default{
-  name: "RegisterForm",
+  name: "AdminRegister",
   components:{
       'btn':Button
   },
   data() {
     return  {
        obj:{
-        name: "FiBank",
-        username: "fibank",
+        name: "adminn",
+        username: "adminn",
         password: "",
-        eik: "54879848gh56",
+        email: "54879848gh56",
         },
         myStrongPassword: "werdeds",
         isSafe:null,
-        label:"Register",
+        label:"Add admin",
+        title:"Register admin"
         
     };
   },
     methods:{
         async register(){
-            const {name, username, password, eik} = this;
-            const r = await post("http://localhost:8080/api/register", {
-                data: {name, username, password, eik}
+            const {name, username, password, email} = this;
+            const r = await post("http://localhost:8080/api/auth/admin/register", {
+                data: {name, username, password, email}
             });
             const res = await r.json();
             return res;
@@ -112,5 +113,4 @@ export default{
 	}
 	
 </style>
-
 
