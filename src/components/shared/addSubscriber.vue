@@ -1,26 +1,24 @@
 <template>
     <div id = "reg-form" class="container">
         <div class="register-form">
-            <h2>Client Register</h2>
-            <p>Register your bank here</p>
+            <h2>Add Subscriber</h2>
+            <p>Enter data here</p>
         </div>
         <div id = "register">
             <div class="register-form">
                 <p>
-                <input type="text" v-model="name"  class="register-control" id="inputName" placeholder="Name"> 
+                <input type="text" v-model="phoneNumber"  class="register-control"  placeholder="Phone"> 
                 </p> 
                 <p>
-                <input type="text" v-model="username"  class="register-control" id="inputUsername" placeholder="Username">
+                <input type="text" v-model="firstName"  class="register-control"  placeholder="First Name">
                 </p>
                 <p>
-                <vue-isyourpasswordsafe v-model="myStrongPassword" placeholder="Your password"	@onFinishedChecking="isPasswordSafe"/>
+                <input type="text"  v-model="lastName" class="register-control" placeholder="Last Name">
                 </p>
                 <p>
-                <input type="password"  v-model="password" class="register-control" id="inputPassword" placeholder="Repeat password">
+                <input type="text" v-model="address"  class="register-control"  placeholder="Address">
                 </p>
-                <h4 v-if="isSafe">Your password should be good to go :)</h4>
-		        <h4 v-if="isSafe === false" class="error">Your password has been leaked and you <strong>shouldn't</strong> use it!</h4>
-                <input type="text" v-model="eik"  class="register-control" id="inputEik" placeholder="EIK">    
+                <input type="text" v-model="egn"  class="register-control" placeholder="EGN">    
               </div>   
               <btn v-on:register = "register()" v-bind:label= "label" v-bind:obj= "obj"/>
               
@@ -29,49 +27,52 @@
 </template>
 
 <script>
-
+import Vue from "vue";
 import request from './helper.js'
 import Button from './Button.vue'
+
+
 
 const [post, get, put, deletee] = ["POST", "GET", "PUT", "DELETE"].map(request);
 
 export default{
-  name: "RegisterForm",
+  name: "AddSubscriber",
   components:{
       'btn':Button
   },
   data() {
     return  {
-       obj:{
-        name: "FiBank",
-        username: "fibank",
-        password: "",
-        eik: "54879848gh56",
-        },
-        myStrongPassword: "werdeds",
-        isSafe:null,
+      
+        phoneNumber: "08888888",
+        firstName: "Edward",
+        lastName: "Stewart",
+        address: "Sofia",
+        egn: "123456798",
+        
+       
         label:"Register",
         
     };
   },
     methods:{
         async register(){
-            const {name, username, password, eik} = this;
-            const r = await post("http://localhost:8080/api/register", {
-                data: {name, username, password, eik}
+            //this.$http.headers.common['Authorization'] = 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiIzIiwiaWF0IjoxNTM2MzE0MzI2LCJleHAiOjE1MzY5MTkxMjZ9.ja0RHAxn14WqIGsAzD8otdx1wlI7PieXBISWGv752bhDVC0Sz48OgFx2tEeR8yUEvX7JAVSZBX2YVVOfJaJrQQ';
+            const {phoneNumber,firstName,lastName,address,egn} = this;
+            const r = await post("http://localhost:8080/api/clients/subscribers", {
+                data: {phoneNumber,firstName,lastName,address,egn}
             });
             const res = await r.json();
             return res;
+        
         },
-        isPasswordSafe(val) {
-			this.isSafe = val;
-        }
+        
     }
     
 }
 </script>
 
 <style scoped>
+
     .container {
   background: rgba(35, 168, 221, 0.123) none repeat scroll 0 0;
   border-radius: 2px;
@@ -79,9 +80,11 @@ export default{
   max-width: 50%;
   padding: 50px 70px 70px 71px;
 }
+
     .register-form{
         color: #f7f7f7;
     }
+
         
     input {
 		-webkit-box-align: center;
@@ -110,7 +113,8 @@ export default{
 		text-align: center;
 		margin-bottom: 10px;
 	}
+
+
 	
+
 </style>
-
-

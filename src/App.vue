@@ -2,8 +2,11 @@
   <div id="app">
   
       <app-header v-bind:title = "title" v-on:changeTitle = "updateTitle($event)"/>
-      <signin-form/>
-      <register-form/>
+      <!-- <signin-form/> -->
+      <!-- <register-form/> -->
+      <!-- <show-users/> -->
+      <router-view></router-view>
+      <!-- <AddSubscriber/> -->
       <app-footer v-bind:title= "title"/>
   </div>
 </template>
@@ -20,6 +23,8 @@ Vue.use(BootstrapVue);
 import Header from './components/Header.vue'
 import SigninForm from './components/shared/SigninForm.vue'
 import RegisterForm from './components/shared/RegisterForm.vue'
+import ShowUsers from './components/shared/showUsers.vue'
+import AddSubscriber from './components/shared/addSubscriber.vue'
 import Footer from './components/Footer.vue'
 
 
@@ -28,7 +33,7 @@ import Footer from './components/Footer.vue'
 export default {
   name: 'app',
   components: {
-    SigninForm, RegisterForm,
+    SigninForm, RegisterForm,ShowUsers,AddSubscriber,
     'app-footer':Footer,
     'app-header':Header
    

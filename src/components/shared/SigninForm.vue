@@ -23,7 +23,6 @@ import request from './helper.js'
 import Button from './Button.vue'
 
 const [post, get, put, deletee] = ["POST", "GET", "PUT", "DELETE"].map(request);
-
 export default{
   name: "SigninForm",
   components: {
@@ -48,19 +47,17 @@ export default{
       this.saveSession({ username, accessToken });
     },
     saveSession(session) {
-      
+      localStorage.clear();
       localStorage.setItem("usersession", JSON.stringify(session));
       console.log(
       localStorage.getItem("usersession"));
     }
   }
 };
-
  
 </script>
 
 <style scoped >
-
  .content {
   background: rgba(35, 168, 221, 0.123) none repeat scroll 0 0;
   border-radius: 2px;
@@ -71,7 +68,6 @@ export default{
 .form-heading {
   color: #f7f7f7;
 }
-
 .form-group {
   margin-bottom: 10px;
 }
@@ -79,7 +75,6 @@ export default{
   text-align: center;
   color: #f7f7f7;
 }
-
    input {
 		-webkit-box-align: center;
 		-ms-flex-align: center;

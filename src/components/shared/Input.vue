@@ -1,5 +1,5 @@
 <template>
-   <input type="text" v-bind:obj= "obj" class="register-control" :placeholder="placeholderName">
+   <input type="text" class="register-control" :placeholder="placeholderName">
 </template>
 
 <script>
@@ -17,6 +17,7 @@ props: {
     },
     data(){
         return{
+
         }
     }
 }
