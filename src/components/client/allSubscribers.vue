@@ -9,14 +9,24 @@
                  <h4>{{sub.address}}</h4>
                  <h4>{{sub.egn}}</h4>
                  <h4>{{sub.phoneNumber}}</h4>
-                 <button class= "btn" v-on:click = "deleteElements(sub.id, index)" >Delete</button>
+                 <button class= "btn" @click = "deleteElements(sub.id, index)" >Delete</button>
                  <button class= "btn" @click="isShown=!isShown" >Update</button>
-                 <button class= "btn" @click="isShown=!isShown" >Add Service</button>
+                 
+  					<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+   						Add Service
+					</button>
+					<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+					<input class="dropdown-item " v-on:keyup.enter = "addservice(sub.id),show=index" v-model="name"/>
+                     
+					</div>
+			
                  <button class= "btn" @click="isShown=!isShown" >Pay Bills</button>
+                  <h4 v-show="show === index">Service added successfuly :)</h4>
                 
                  </li>
             </ul>
         </div>
+        
         <!-- <router-link tag="button" class="myClass" id="button" :to="ShowUsers">Manage</router-link> -->
     </div>
 </template>
@@ -39,7 +49,11 @@ export default{
             subscribers:[],
             label:"Update",
             isShown:false,
-            title: "All Subscribers"
+            title: "All Subscribers",
+            serviceAdded:false,
+            name: "",
+            show: null
+            
         }
     }, 
     methods:{
@@ -59,7 +73,28 @@ export default{
           }
             })
             
-        }
+        },
+       async addservice(id){
+
+             const {name} = this;
+
+            const r = await post("http://localhost:8080/api/clients/subscribers/"+`${id}`+"/services/",{
+                data:{name}
+            });
+
+             const res= await r.json();
+             this.serviceAdded=true;
+             return res;
+    
+        //     const { accessToken } = JSON.parse(localStorage.getItem('usersession') || '{}');
+        //     this.$http.post("/clients/subscribers/"+`${id}`+"services/" ,{
+        //         headers: {
+        //     'Authorization': `Bearer ${accessToken}`
+        //   }
+       }
+            
+
+
 
     },
 
@@ -95,7 +130,7 @@ h4{
   background: rgba(35, 168, 221, 0.123) none repeat scroll 0 0;
   border-radius: 2px;
   margin: 10px auto 10px;
-  max-width: 80%;
+  max-width: 90%;
   padding: 20px 20px 20px 21px;
  }
  ul {
@@ -136,8 +171,8 @@ ul:before, ul:after {
     width:10%;
     position: relative;
         text-align: center;
-        margin-right: 20px;
-        margin-inline-end: 30px;
+        margin-right: 10px;
+        margin-inline-end: 20px;
         float:right;
 
 }

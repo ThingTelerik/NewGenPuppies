@@ -61,11 +61,22 @@ export default{
             const r = await post("http://localhost:8080/api/auth/admin/register", {
                 data: {name, username, password, email}
             });
-            const res = await r.json();
-            return res;
+            const {successful} = await r.json();
+            if(successful!==false){
+            this.navigateTo('showadmins');
+             }else{
+                 this.navigateTo('errorpage');
+             }
+            
         },
         isPasswordSafe(val) {
 			this.isSafe = val;
+        },
+        navigateTo(nav) {
+
+    this.$router.push({
+        path: nav
+    })
         }
     }
     

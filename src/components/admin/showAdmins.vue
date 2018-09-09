@@ -131,8 +131,8 @@ ul:before, ul:after {
     width:10%;
     position: relative;
         text-align: center;
-        margin-right: 20px;
-        margin-inline-end: 30px;
+        margin-right: 10px;
+        margin-inline-end: 20px;
         float:right;
 
 }
@@ -140,6 +140,5 @@ ul:before, ul:after {
 	.btn:hover {
 			background-color: #5ddbcebd;;
 		}
-
 </style>
 

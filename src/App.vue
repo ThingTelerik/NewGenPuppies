@@ -1,8 +1,8 @@
 <template>
   <div id="app">
   
-      <!-- <app-header v-bind:title = "title" v-on:changeTitle = "updateTitle($event)"/> -->
-      <client-nav  v-bind:title = "title" v-on:changeTitle = "updateTitle($event)"/>
+      <app-header v-bind:title = "title" v-on:changeTitle = "updateTitle($event)"/>
+      <!-- <client-nav  v-bind:title = "title" v-on:changeTitle = "updateTitle($event)"/> -->
       <!-- <signin-form/> -->
       <!-- <register-form/> -->
       <!-- <show-users/> -->
