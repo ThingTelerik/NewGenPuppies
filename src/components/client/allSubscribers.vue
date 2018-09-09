@@ -1,18 +1,23 @@
 <template>
     <div id = "show-users">
-        <h1>All admins</h1>
-        <div v-for="(user, index) in users"  :key="index" class = "single-user">
+        <h1>{{title}}</h1>
+        <div v-for="(sub, index) in subscribers"  :key="index" class = "single-user">
             <ul class= "container">
                 <li>
-                <h4>{{user.username}}</h4>
-                 <h4>{{user.email}}</h4>
-                 <button class= "btn" v-on:click = "deleteElements(user.id,index)" >Delete</button>
+                <h4>{{sub.firstName}}</h4>
+                 <h4>{{sub.lastName}}</h4>
+                 <h4>{{sub.address}}</h4>
+                 <h4>{{sub.egn}}</h4>
+                 <h4>{{sub.phoneNumber}}</h4>
+                 <button class= "btn" v-on:click = "deleteElements(sub.id, index)" >Delete</button>
                  <button class= "btn" @click="isShown=!isShown" >Update</button>
-                 <admin-update v-if="isShown"/>
+                 <button class= "btn" @click="isShown=!isShown" >Add Service</button>
+                 <button class= "btn" @click="isShown=!isShown" >Pay Bills</button>
+                
                  </li>
             </ul>
         </div>
-        <router-link tag="button" class="myClass" id="button" :to="ShowUsers">Manage</router-link>
+        <!-- <router-link tag="button" class="myClass" id="button" :to="ShowUsers">Manage</router-link> -->
     </div>
 </template>
 
@@ -20,35 +25,35 @@
 import Vue from "vue";
 import request from '../shared/helper.js'
 import Button from '../shared/Button.vue'
-import AdminUpdate from './updateAdmin.vue'
 
 const [post, get, put, deletee] = ["POST", "GET", "PUT", "DELETE"].map(request);
 
 export default{
-  name: "ShowAdmins",
+  name: "AllSubs",
   components:{
-      Button, AdminUpdate
+      Button
   },
   
     data(){
         return{
-            users:[],
+            subscribers:[],
             label:"Update",
-            isShown:false
+            isShown:false,
+            title: "All Subscribers"
         }
     }, 
     methods:{
         deleteElements(key, index) {
             
-             this.$delete(this.users, index);
+             this.$delete(this.subscribers, index);
              this.delete(key);
         },
         toggle(){
             this.isShown !=this.isShown;
         },
-        delete(username){
+        delete(id){
             const { accessToken } = JSON.parse(localStorage.getItem('usersession') || '{}');
-            this.$http.delete("http://localhost:8080/api/auth/admin/delete/" + `${username}`,{
+            this.$http.delete("http://localhost:8080/api/clients/subscribers/" + `${id}`,{
                 headers: {
             'Authorization': `Bearer ${accessToken}`
           }
@@ -60,15 +65,15 @@ export default{
 
     created(){
          const { accessToken } = JSON.parse(localStorage.getItem('usersession') || '{}');
-            this.$http.get("http://localhost:8080/api/auth/admin/alladmins",{
+            this.$http.get("http://localhost:8080/api/clients/subscribers",{
                 headers: {
             'Authorization': `Bearer ${accessToken}`
           }
             })
             .then(function(data){
-                console.log(data.body);
-                this.$set(this, 'users', data.body);
-                console.log(this.users)
+                console.log(data.body.content);
+                this.$set(this, 'subscribers', data.body.content);
+                console.log(this.subscribers)
             })
     }
 }
@@ -90,7 +95,7 @@ h4{
   background: rgba(35, 168, 221, 0.123) none repeat scroll 0 0;
   border-radius: 2px;
   margin: 10px auto 10px;
-  max-width: 50%;
+  max-width: 80%;
   padding: 20px 20px 20px 21px;
  }
  ul {
@@ -142,4 +147,3 @@ ul:before, ul:after {
 		}
 
 </style>
-

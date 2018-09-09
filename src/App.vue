@@ -1,7 +1,8 @@
 <template>
   <div id="app">
   
-      <app-header v-bind:title = "title" v-on:changeTitle = "updateTitle($event)"/>
+      <!-- <app-header v-bind:title = "title" v-on:changeTitle = "updateTitle($event)"/> -->
+      <client-nav  v-bind:title = "title" v-on:changeTitle = "updateTitle($event)"/>
       <!-- <signin-form/> -->
       <!-- <register-form/> -->
       <!-- <show-users/> -->
@@ -21,6 +22,7 @@ import 'bootstrap-vue/dist/bootstrap-vue.css';
 Vue.use(BootstrapVue);
 
 import Header from './components/Header.vue'
+import ClientNav from './components/client/ClientNav.vue'
 import SigninForm from './components/shared/SigninForm.vue'
 import RegisterForm from './components/RegisterForm.vue'
 import ShowAdmins from './components/admin/showAdmins'
@@ -33,7 +35,7 @@ import Footer from './components/Footer.vue'
 export default {
   name: 'app',
   components: {
-    SigninForm, RegisterForm,ShowAdmins,AddSubscriber,
+    SigninForm, RegisterForm,ShowAdmins,AddSubscriber,ClientNav,
     'app-footer':Footer,
     'app-header':Header
    

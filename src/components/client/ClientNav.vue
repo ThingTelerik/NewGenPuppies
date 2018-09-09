@@ -9,6 +9,9 @@
 						</button>
 						<div class="collapse navbar-collapse" id="navbarResponsive">
 							<ul class="navbar-nav ml-auto ">
+                                <li class="nav-item">
+										<router-link to= '/allsubs' class = "nav-link">Register Client</router-link>
+								</li>
 								<li class="nav-item">
 									<div class="dropdown">
   											<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -75,4 +78,3 @@ export default {
     margin-right: 10px;
 }
 </style>
-
