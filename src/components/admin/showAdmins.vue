@@ -1,13 +1,14 @@
 <template>
     <div id = "show-users">
         <h1>All admins</h1>
-        <div v-for="user in users" :key="user.id" class = "single-user">
+        <div v-for="(user, index) in users"  :key="index" class = "single-user">
             <ul class= "container">
                 <li>
                 <h4>{{user.username}}</h4>
                  <h4>{{user.email}}</h4>
-                 <button class= "btn" >Update</button>
-                 <button class= "btn" >Delete</button>
+                 <button class= "btn" v-on:click = "deleteElements(user.id,index)" >Delete</button>
+                 <button class= "btn" @click="isShown=!isShown" >Update</button>
+                 <admin-update v-if="isShown"/>
                  </li>
             </ul>
         </div>
@@ -19,24 +20,48 @@
 import Vue from "vue";
 import request from '../shared/helper.js'
 import Button from '../shared/Button.vue'
+import AdminUpdate from './updateAdmin.vue'
 
 const [post, get, put, deletee] = ["POST", "GET", "PUT", "DELETE"].map(request);
 
 export default{
   name: "ShowAdmins",
   components:{
-      Button
+      Button, AdminUpdate
   },
   
     data(){
         return{
             users:[],
-            label:"Update"
+            label:"Update",
+            isShown:false
         }
     }, 
     methods:{
-        
+        deleteElements(key, index) {
+            
+             this.$delete(this.users, index);
+             this.delete(key);
+        },
+        toggle(){
+            this.isShown !=this.isShown;
+        },
+        delete(username){
+            const { accessToken } = JSON.parse(localStorage.getItem('usersession') || '{}');
+            this.$http.delete("http://localhost:8080/api/auth/admin/delete/" + `${username}`,{
+                headers: {
+            'Authorization': `Bearer ${accessToken}`
+          }
+            })
+            .then(function(data){
+                console.log(data.body);
+                this.$set(this, 'users', data.body);
+                console.log(this.users)
+            })
+        }
+
     },
+
     created(){
          const { accessToken } = JSON.parse(localStorage.getItem('usersession') || '{}');
             this.$http.get("http://localhost:8080/api/auth/admin/alladmins",{
