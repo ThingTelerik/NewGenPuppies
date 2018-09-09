@@ -23,7 +23,7 @@ Vue.use(BootstrapVue);
 import Header from './components/Header.vue'
 import SigninForm from './components/shared/SigninForm.vue'
 import RegisterForm from './components/RegisterForm.vue'
-import ShowUsers from './components/shared/showUsers.vue'
+import ShowAdmins from './components/admin/showAdmins'
 import AddSubscriber from './components/shared/addSubscriber.vue'
 import Footer from './components/Footer.vue'
 
@@ -33,7 +33,7 @@ import Footer from './components/Footer.vue'
 export default {
   name: 'app',
   components: {
-    SigninForm, RegisterForm,ShowUsers,AddSubscriber,
+    SigninForm, RegisterForm,ShowAdmins,AddSubscriber,
     'app-footer':Footer,
     'app-header':Header
    

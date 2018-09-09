@@ -16,7 +16,15 @@
 										<router-link to= '/registerclient' class = "nav-link">Register Client</router-link>
 								</li>
 								<li class="nav-item">
-										<router-link to= '/showUsers' class = "nav-link">Manage</router-link>
+										<div class="dropdown">
+  											<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+   											 Manage
+												</button>
+												<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+													<router-link to= '/showadmins' class="dropdown-item">Admins</router-link>
+													<a class="dropdown-item" href="#">Clients</a>
+												</div>
+										</div>
 								</li>
 								<li class="nav-item">
 									<div class="input-group mb-3">
@@ -57,6 +65,9 @@ export default {
 </script>
 
 <style>
-
+#dropdownMenuButton{
+  display:block;
+    margin-right: 10px;
+}
 </style>
 

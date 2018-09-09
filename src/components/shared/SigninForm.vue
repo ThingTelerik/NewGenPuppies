@@ -51,7 +51,6 @@ export default{
       }
     },
     saveSession(session) {
-      localStorage.clear();
       localStorage.setItem("usersession", JSON.stringify(session));
       console.log(
       localStorage.getItem("usersession"));
