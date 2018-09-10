@@ -46,9 +46,9 @@ export default{
       const { accessToken } = await r.json();
     
       this.saveSession({ username, accessToken });
-      if(accessToken!==undefined){
-      this.navigateTo('registerclient');
-      }
+     // if(accessToken!==undefined){
+      this.navigateTo('registeradmin');
+     // }
     },
     saveSession(session) {
       localStorage.setItem("usersession", JSON.stringify(session));

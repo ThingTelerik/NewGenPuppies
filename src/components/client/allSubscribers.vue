@@ -17,11 +17,11 @@
 					</button>
 					<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 					<input class="dropdown-item " v-on:keyup.enter = "addservice(sub.id),show=index" v-model="name"/>
-                     
+                       
 					</div>
     
                  <button class= "btn" @click="saveId(sub.id), navigateTo()" >Pay Bills</button>
-
+                 <h4 v-show="show === index">Service added successfuly :)</h4>
                                  
                  </li>
             </ul>

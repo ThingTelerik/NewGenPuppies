@@ -4,6 +4,7 @@
       <app-header v-bind:title = "title" v-on:changeTitle = "updateTitle($event)"/>
       <!-- <client-nav  v-bind:title = "title" v-on:changeTitle = "updateTitle($event)"/> -->
       <!-- <signin-form/> -->
+      <!-- <c-signin-form/> -->
       <!-- <register-form/> -->
       <!-- <show-users/> -->
       <router-view></router-view>
@@ -28,6 +29,7 @@ import RegisterForm from './components/RegisterForm.vue'
 import ShowAdmins from './components/admin/showAdmins'
 import AddSubscriber from './components/shared/addSubscriber.vue'
 import Footer from './components/Footer.vue'
+import CSigninForm from './components/client/clientSignin.vue' 
 
 
 
@@ -35,7 +37,7 @@ import Footer from './components/Footer.vue'
 export default {
   name: 'app',
   components: {
-    SigninForm, RegisterForm,ShowAdmins,AddSubscriber,ClientNav,
+    SigninForm, RegisterForm,ShowAdmins,AddSubscriber,ClientNav,CSigninForm,
     'app-footer':Footer,
     'app-header':Header,
 
