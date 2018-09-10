@@ -20,6 +20,8 @@ const router = new VueRouter({
 	mode: 'history'
 })
 
+export const bus = new Vue();
+
 
 new Vue({
 	render: h => h(App),

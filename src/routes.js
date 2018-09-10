@@ -5,6 +5,8 @@ import ClientRegister from './components/client/clientRegister.vue'
 import AddSubscriber from './components/shared/addSubscriber.vue'
 import AllSubs from './components/client/allSubscribers.vue'
 import ErrorPage from './components/shared/adminErrorPage.vue'
+import AdminUpdate from './components/admin/updateAdmin.vue'
+import UnpaidBills from './components/client/unpaidBills.vue'
 
 export default[
 
@@ -14,7 +16,10 @@ export default[
 {path: '/showadmins', component:ShowAdmins},
 {path: '/addsubs', component:AddSubscriber},
 {path: '/allsubs', component:AllSubs},
-{path: '/errorpage', component:ErrorPage},
+{path: '/adminerrorpage', component:ErrorPage},
+{path: '/adminupdate', component:AdminUpdate},
+{path: '/unpaidbills', component:UnpaidBills},
+
 //
 //
 

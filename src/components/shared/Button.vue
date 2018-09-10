@@ -24,6 +24,7 @@ props: {
     methods:{
       register:function(){
      this.$emit('register', {})
+      //this.$emit('register', this.prop)
       }
     }
 }

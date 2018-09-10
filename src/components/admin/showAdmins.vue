@@ -7,8 +7,8 @@
                 <h4>{{user.username}}</h4>
                  <h4>{{user.email}}</h4>
                  <button class= "btn" v-on:click = "deleteElements(user.id,index)" >Delete</button>
-                 <button class= "btn" @click="isShown=!isShown" >Update</button>
-                 <admin-update v-if="isShown"/>
+                 <button class= "btn" @click="navigateTo(),isShown=!isShown,show=index" >Update</button>
+                 <admin-update v-show="show === index" v-if="isShown"/>
                  </li>
             </ul>
         </div>
@@ -34,7 +34,8 @@ export default{
         return{
             users:[],
             label:"Update",
-            isShown:false
+            isShown:false,
+            show:null
         }
     }, 
     methods:{
@@ -54,7 +55,13 @@ export default{
           }
             })
             
-        }
+        },
+         navigateTo (nav) {
+
+            this.$router.push({
+             path: 'adminupdate'
+        })
+  }
 
     },
 

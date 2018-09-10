@@ -1,29 +1,25 @@
 <template>
     <div id = "show-users">
         <h1>{{title}}</h1>
-        <div v-for="(sub, index) in subscribers"  :key="index" class = "single-user">
-            <ul class= "container">
-                <li>
-                <h4>{{sub.firstName}}</h4>
-                 <h4>{{sub.lastName}}</h4>
-                 <h4>{{sub.address}}</h4>
-                 <h4>{{sub.egn}}</h4>
-                 <h4>{{sub.phoneNumber}}</h4>
-                 <button class= "btn" @click = "deleteElements(sub.id, index)" >Delete</button>
-                 <button class= "btn" @click="isShown=!isShown" >Update</button>
-                 
-  					<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-   						Add Service
-					</button>
-					<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-					<input class="dropdown-item " v-on:keyup.enter = "addservice(sub.id),show=index" v-model="name"/>
-                     
-					</div>
-    
-                 <button class= "btn" @click="saveId(sub.id), navigateTo()" >Pay Bills</button>
 
-                                 
-                 </li>
+        
+
+        <div v-for="(bill, index) in bills"  :key="index" class = "single-user">
+            <ul class= "container">
+                
+                <li>
+                <h4>{{bill.service.name}}</h4>
+                 <h4>{{bill.startDate}}</h4>
+                <h4>{{bill.endDate}}</h4>
+                 <h4>{{bill.paymentDate}}</h4>
+                 <h4>{{bill.amount}}</h4>
+                 <h4>{{bill.currency}}</h4>
+                 
+                 <button class= "btn" @click = "payBills(bill.id,index)" >Pay</button>
+               
+                  <button class= " btn btn-center" @click = "payAllBills()" >Pay all</button>
+                 </li> 
+               
             </ul>
         </div>
         
@@ -40,90 +36,76 @@ import {bus} from '../../main.js'
 const [post, get, put, deletee] = ["POST", "GET", "PUT", "DELETE"].map(request);
 
 export default{
-  name: "AllSubs",
+  name: "UnpaidBills",
   components:{
       Button
   },
   
     data(){
         return{
-            subscribers:[],
-            label:"Update",
+            bills:[],
+            label:"Pay",
             isShown:false,
-            title: "All Subscribers",
+            title: "Unpaid Bills",
             serviceAdded:false,
             name: "",
             show: null
-         
+           
+        
             
         }
     }, 
     methods:{
-        deleteElements(key, index) {
-            
-             this.$delete(this.subscribers, index);
-             this.delete(key);
-        },
         toggle(){
             this.isShown !=this.isShown;
         },
-        delete(id){
-            const { accessToken } = JSON.parse(localStorage.getItem('usersession') || '{}');
-            this.$http.delete("http://localhost:8080/api/clients/subscribers/" + `${id}`,{
-                headers: {
-            'Authorization': `Bearer ${accessToken}`
-          }
-            })
-            
-        },
-       async addservice(id){
-
-             const {name} = this;
-
-            const r = await post("http://localhost:8080/api/clients/subscribers/"+`${id}`+"/services/",{
-                data:{name}
+       
+       async payBills(billId, index){
+            const r = await put("http://localhost:8080/api/clients/"+`${1}`+"/payBill/"+`${billId}`,{
             });
+             const res= await r.json() 
+             this.$delete(this.bills, index);
 
-             const res= await r.json();
-             this.serviceAdded=true;
              return res;
-    
-       },
-       saveId(id){
-
-
-          localStorage.setItem('subid', JSON.stringify("r",id));
-      
-          
-      
 
        },
-       navigateTo(nav) {
-           this.saveId();
+        async payAllBills(){
+            const r = await put("http://localhost:8080/api/clients/1/payAllUnpaidBills",{
+            });
+             const res= await r.json() 
+             this.bills.splice(0,this.bills.length)
+            this.navigateTo();
+             return res;     
+
+       },
+        navigateTo(nav) {
         this.$router.push({
-        path: 'unpaidbills'
-    });
+        path: 'allsubs'
+
+        })
         }
-    
             
-
-
 
     },
+ 
 
     created(){
+        const {r} = JSON.parse(localStorage.getItem('subid') || '{}');
+         const id=1;
+         
          const { accessToken } = JSON.parse(localStorage.getItem('usersession') || '{}');
-            this.$http.get("http://localhost:8080/api/clients/subscribers",{
+            this.$http.get("http://localhost:8080/api/clients/"+`${id}`+"/bills",{
                 headers: {
             'Authorization': `Bearer ${accessToken}`
           }
             })
             .then(function(data){
                 console.log(data.body.content);
-                this.$set(this, 'subscribers', data.body.content);
-                console.log(this.subscribers)
+                this.$set(this, 'bills', data.body.content);
+                console.log(this.bills)
             })
     }
+   
 }
 </script>
 
@@ -189,6 +171,7 @@ ul:before, ul:after {
         float:right;
 
 }
+
 
 	.btn:hover {
 			background-color: #5ddbcebd;;

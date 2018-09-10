@@ -65,7 +65,7 @@ export default{
             if(successful!==false){
             this.navigateTo('showadmins');
              }else{
-                 this.navigateTo('errorpage');
+                 this.navigateTo('adminerrorpage');
              }
             
         },

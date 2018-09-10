@@ -2,7 +2,7 @@
     <div id = "reg-form" class="container">
         <div class="register-form">
             <h2>{{title}}</h2>
-            <p>{{title}}</p>
+            <p>{{detail}}</p>
         </div>
         <div id = "register">
             <div class="register-form">
@@ -22,19 +22,16 @@
 		        <h4 v-if="isSafe === false" class="error">Password has been leaked and you <strong>shouldn't</strong> use it!</h4>
                 <input type="text" v-model="email"  class="register-control" id="inputemail" placeholder="Email">    
               </div>   
-              <btn v-on:register = "register()" v-bind:label= "label" v-bind:obj= "obj"/>
+              <btn v-on:register = "register('secret@abv.bg')" v-bind:label= "label" v-bind:obj= "obj"/>
               
         </div>
     </div>
 </template>
 
 <script>
-
 import Button from '../shared/Button'
 import request from '../shared/helper.js'
-
 const [post, get, put, deletee] = ["POST", "GET", "PUT", "DELETE"].map(request);
-
 export default{
   name: "AdminUpdate",
   components:{
@@ -51,22 +48,33 @@ export default{
         myStrongPassword: "werdeds",
         isSafe:null,
         label:"Update",
-        title:"Update admin"
+        title:"Update admin",
+        detail:"Set new properties here"
         
     };
   },
-    methods:{
-        async register(){
+
+        methods:{
+        async register(passedemail){
             const {name, username, password, email} = this;
-            const r = await post("http://localhost:8080/api/auth/admin/register", {
+            const r = await put("http://localhost:8080/api/auth/admin/update/" + `${passedemail}`, {
                 data: {name, username, password, email}
             });
-            const res = await r.json();
+            const res = await r.json(); 
+            this.navigateTo();
             return res;
+           
         },
         isPasswordSafe(val) {
 			this.isSafe = val;
-        }
+        },
+         navigateTo (nav) {
+
+            this.$router.push({
+             path: 'showadmins'
+        })
+         }
+        
     }
     
 }
@@ -77,7 +85,7 @@ export default{
   background: rgba(35, 168, 221, 0.123) none repeat scroll 0 0;
   border-radius: 2px;
   margin: 10px auto 30px;
-  max-width: 50%;
+  max-width: 70%;
   padding: 50px 70px 70px 71px;
 }
     .register-form{
