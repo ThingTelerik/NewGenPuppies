@@ -21,7 +21,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap-vue/dist/bootstrap-vue.css';
 Vue.use(BootstrapVue);
 
-import Header from './components/Header.vue'
+import Header from './components/adminNav.vue'
 import ClientNav from './components/client/ClientNav.vue'
 import SigninForm from './components/shared/SigninForm.vue'
 import RegisterForm from './components/RegisterForm.vue'
@@ -37,7 +37,8 @@ export default {
   components: {
     SigninForm, RegisterForm,ShowAdmins,AddSubscriber,ClientNav,
     'app-footer':Footer,
-    'app-header':Header
+    'app-header':Header,
+
    
   },
   data(){

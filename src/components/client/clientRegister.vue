@@ -62,12 +62,23 @@ export default{
             const r = await post("http://localhost:8080/api/register", {
                 data: {name, username, password, eik}
             });
-            const res = await r.json();
-            return res;
+            const {successful} = await r.json();
+            if(successful!==false){
+            this.navigateTo('showclients');
+             }else{
+                 this.navigateTo('adminerrorpage');
+             }
         },
         isPasswordSafe(val) {
 			this.isSafe = val;
+        },
+        navigateTo(nav) {
+
+    this.$router.push({
+        path: nav
+    })
         }
+
     }
     
 }

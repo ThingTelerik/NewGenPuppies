@@ -27,7 +27,7 @@
 												</button>
 												<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 													<router-link to= '/showadmins' class="dropdown-item">Admins</router-link>
-													<!-- <router-link to= '/showclients' class="dropdown-item">Clients</router-link> -->
+													<router-link to= '/showclients' class="dropdown-item">Clients</router-link>
 												</div>
 										</div>
 								</li>
